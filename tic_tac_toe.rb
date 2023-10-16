@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-## Creates the player object, holding the symbol they selected and their corresponding name (Player1, Player2)
+## Holds the symbol they selected and their corresponding name (Player1, Player2)
 class Player
   attr_reader :name, :symbol
 
@@ -13,3 +13,19 @@ class Player
     @name
   end
 end
+
+# Initializes the board in the terminal, checks for wins, updates the moves
+class Board
+  def initialize
+    @board = Array.new(3) { Array.new(3, '-') }
+  end
+
+  def display
+    @board.each do |row|
+      puts row.join(' | ')
+    end
+  end
+end
+
+milko = Board.new
+milko.display
