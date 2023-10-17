@@ -49,11 +49,26 @@ class Board
   def check_column_win
     3.times do |col|
       column = @board.map { |row| row[col] }
-      return column[0] if column.uniq.length == 1 && !column.include?(' ')
+      return column[0] if column.uniq.length == 1 && !column.include?('-')
     end
     nil
   end
 
+  def check_win_diagonals
+    diagonal1 = [@board[0][0], @board[1][1], @board[2][2]]
+    diagonal2 = [@board[0][2], @board[1][1], @board[2][0]]
+
+    if diagonal1.uniq.length == 1 && !diagonal1.include?(' ')
+      diagonal1[0]
+    elsif diagonal2.uniq.length == 1 && !diagonal2.include?(' ')
+      diagonal2[0]
+    end
+    nil
+  end
+
+  def check_win
+    check_win_row || check_column_win || check_win_diagonals
+  end
 end
 
 murtveca = Board.new
