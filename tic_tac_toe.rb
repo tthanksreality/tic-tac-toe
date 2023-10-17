@@ -70,15 +70,3 @@ class Board
     check_win_row || check_column_win || check_win_diagonals
   end
 end
-
-murtveca = Board.new
-murtveca.display
-p murtveca.valid?(1, 2)
-murtveca.update(1, 1, 'X')
-murtveca.update(1, 2, 'X')
-murtveca.update(1, 3, 'X')
-murtveca.display
-murtveca.update(2, 1, 'X')
-murtveca.update(3, 1, 'X')
-murtveca.display
-p murtveca.check_column_win
