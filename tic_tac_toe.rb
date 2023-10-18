@@ -58,10 +58,10 @@ class Board
     diagonal1 = [@board[0][0], @board[1][1], @board[2][2]]
     diagonal2 = [@board[0][2], @board[1][1], @board[2][0]]
 
-    if diagonal1.uniq.length == 1 && !diagonal1.include?(' ')
-      diagonal1[0]
-    elsif diagonal2.uniq.length == 1 && !diagonal2.include?(' ')
-      diagonal2[0]
+    if diagonal1.uniq.length == 1 && !diagonal1.include?('-')
+      return diagonal1[0]
+    elsif diagonal2.uniq.length == 1 && !diagonal2.include?('-')
+      return diagonal2[0]
     end
     nil
   end
@@ -84,7 +84,7 @@ class Game
   end
 
   def take_turn(player)
-    puts "#{player}, it's your turn (Enter row and column): "
+    puts "#{player}, it's your turn (Enter row and column): @"
     row, col = gets.chomp.split.map(&:to_i)
 
     return if @cage.update(row, col, player.symbol)
