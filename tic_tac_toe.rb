@@ -87,7 +87,7 @@ class Game
     puts "#{player}, it's your turn (Enter row and column): "
     row, col = gets.chomp.split.map(&:to_i)
 
-    return if @board.update(row, col, player.symbol)
+    return if @cage.update(row, col, player.symbol)
 
     puts 'Invalid move. Try again.'
     take_turn(player)
