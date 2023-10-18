@@ -94,6 +94,50 @@ class Game
   end
 
   def switch_players
-    @current_player = @current_player == @players[0] ? @players[1] : players[0]
+    @current_player = @current_player == @players[0] ? @players[1] : @players[0]
+  end
+
+  def play_again?
+    puts 'Wanna play again?'
+    choice = gets.chomp.downcase
+    if choice == 'yes'
+      reset_game
+      play
+    else
+      puts 'Thanks for your time'
+    end
+  end
+
+  def reset_game
+    @cage = Board.new
+    @current_player = @players[0]
+  end
+
+  def play
+    loop do
+      @cage.display
+      take_turn(@current_player)
+
+      if @cage.check_win
+        @cage.display
+        puts "#{@current_player} wins!"
+        break
+      elsif @cage.full?
+        @cage.display
+        puts "It's a draw!"
+        break
+      end
+
+      switch_players
+    end
+
+    play_again?
   end
 end
+
+# Main program
+player1 = Player.new('Player 1', 'X')
+player2 = Player.new('Player 2', 'O')
+
+game = Game.new(player1, player2)
+game.play
