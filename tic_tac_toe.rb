@@ -92,4 +92,8 @@ class Game
     puts 'Invalid move. Try again.'
     take_turn(player)
   end
+
+  def switch_players
+    @current_player = @current_player == @players[0] ? @players[1] : players[0]
+  end
 end
