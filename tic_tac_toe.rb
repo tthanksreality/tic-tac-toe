@@ -69,4 +69,27 @@ class Board
   def check_win
     check_win_row || check_column_win || check_win_diagonals
   end
+
+  def full?
+    @board.all? { |row| row.none?('-') }
+  end
+end
+
+# Manages the basic game loop, holds the current player and players in general
+class Game
+  def initialize(player1, player2)
+    @cage = Board.new
+    @players = [player1, player2]
+    @current_player = player1
+  end
+
+  def take_turn(player)
+    puts "#{player}, it's your turn (Enter row and column): "
+    row, col = gets.chomp.split.map(&:to_i)
+
+    return if @board.update(row, col, player.symbol)
+
+    puts 'Invalid move. Try again.'
+    take_turn(player)
+  end
 end
